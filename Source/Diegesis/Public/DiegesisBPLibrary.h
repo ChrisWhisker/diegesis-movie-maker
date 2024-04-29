@@ -1,4 +1,4 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
+// Copyright Chris Worcester All Rights Reserved.
 
 #pragma once
 
@@ -22,11 +22,46 @@
 *	For more info on custom blueprint nodes visit documentation:
 *	https://wiki.unrealengine.com/Custom_Blueprint_Node_Creation
 */
+class ULevelSequencePlayer;
+
 UCLASS()
 class UDiegesisBPLibrary : public UBlueprintFunctionLibrary
 {
 	GENERATED_UCLASS_BODY()
 
-	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Execute Sample function", Keywords = "Diegesis sample test testing"), Category = "DiegesisTesting")
-	static float DiegesisSampleFunction(float Param);
+private:
+	UPROPERTY()
+	ULevelSequencePlayer* SequencePlayer;
+
+	bool bIsPlaying;
+
+	bool bIsLooping;
+
+public:
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Set sequence player", Keywords = "play stop"), Category = "Setup")
+	void SetSequencePlayer(ULevelSequencePlayer* NewSequencePlayer);
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Set Is Looping", Keywords = "play stop"), Category = "Settings")
+	void SetIsLooping(const bool bNewLooping);
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Play movie", Keywords = "pause stop"), Category = "Playback")
+	void PlayMovie();
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Pause movie", Keywords = "play stop"), Category = "Playback")
+	void PauseMovie();
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Play movie", Keywords = "play pause"), Category = "Playback")
+	void StopMovie();
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Get current frame", Keywords = ""), Category = "Playback")
+	int GetCurrentFrame(bool& bOutSuccess);
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Get current time", Keywords = ""), Category = "Playback")
+	float GetCurrentTime(bool& bOutSuccess);
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Set current frame", Keywords = ""), Category = "Playback")
+	void SetCurrentFrame(const int Frame);
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "Set current time", Keywords = ""), Category = "Playback")
+	void SetCurrentTime(const float Time);
 };

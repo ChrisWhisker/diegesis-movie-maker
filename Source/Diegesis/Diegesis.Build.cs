@@ -26,6 +26,7 @@ public class Diegesis : ModuleRules
 			new string[]
 			{
 				"Core",
+				"SequencerScripting",
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
@@ -38,6 +39,9 @@ public class Diegesis : ModuleRules
 				"Engine",
 				"Slate",
 				"SlateCore",
+				"LevelSequence",
+				"MovieScene",
+				"MovieSceneTracks",
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);
